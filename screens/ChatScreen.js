@@ -1,14 +1,15 @@
-import React from 'react';
 
+import React from 'react';
 import {
   View,
   Text,
+  ScrollView,
   StyleSheet
 } from 'react-native';
 
-export default function ChatScreen({ route }) {
+import Mensagem from '../components/Mensagem';
 
-  // Recupera os parâmetros enviados pela HomeScreen
+export default function ChatScreen({ route }) {
   const { contatoId, contatoNome } = route.params;
 
   return (
@@ -22,11 +23,27 @@ export default function ChatScreen({ route }) {
         ID do contato: {contatoId}
       </Text>
 
-      <View style={styles.areaMensagens}>
-        <Text style={styles.aviso}>
-          Nenhuma mensagem por enquanto.
-        </Text>
-      </View>
+      <ScrollView style={styles.areaMensagens}>
+        <Mensagem
+          mensagem="Olá! Tudo bem?"
+          recebida={true}
+        />
+
+        <Mensagem
+          mensagem="Oi! Tudo ótimo, e você?"
+          recebida={false}
+        />
+
+        <Mensagem
+          mensagem="Tudo bem também!"
+          recebida={true}
+        />
+
+        <Mensagem
+          mensagem="Que bom!"
+          recebida={false}
+        />
+      </ScrollView>
 
     </View>
   );
@@ -48,17 +65,11 @@ const styles = StyleSheet.create({
 
   info: {
     fontSize: 14,
-    color: '#666666'
+    color: '#666666',
+    marginBottom: 15
   },
 
   areaMensagens: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  aviso: {
-    fontSize: 16,
-    color: '#888888'
+    flex: 1
   }
 });
