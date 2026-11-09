@@ -29,16 +29,23 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
 
-      <Text style={styles.titulo}>Contatos</Text>
+      <Text style={styles.titulo}>
+        Contatos
+      </Text>
 
       <FlatList
         data={contatos}
         keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.listaContatos}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.contato}
+            activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel={`Abrir conversa com ${item.nome}`}
             onPress={() => abrirConversa(item)}
           >
+
             <View style={styles.avatar}>
               <Text style={styles.inicial}>
                 {item.nome.charAt(0)}
@@ -48,6 +55,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.nome}>
               {item.nome}
             </Text>
+
           </TouchableOpacity>
         )}
       />
@@ -60,28 +68,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding: 16
+    paddingHorizontal: 16,
+    paddingTop: 16
   },
 
   titulo: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 14,
     color: '#075E54'
+  },
+
+  listaContatos: {
+    paddingBottom: 10
   },
 
   contato: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
+    paddingVertical: 13,
+    paddingHorizontal: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#EEEEEE'
   },
 
   avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: '#075E54',
     justifyContent: 'center',
     alignItems: 'center',
